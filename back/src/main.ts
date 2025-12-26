@@ -7,6 +7,6 @@ async function bootstrap() {
   app.enableCors();
   app.use(helmet());
   app.setGlobalPrefix('api/v1');
-  await app.listen(process.env.PORT ?? 3333, '0.0.0.0');
+  await app.listen(process.env.API_PORT ?? 3333, '0.0.0.0');
 }
 bootstrap();

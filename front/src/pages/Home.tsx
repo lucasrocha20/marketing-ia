@@ -1,3 +1,4 @@
+import process from 'process';
 import { useState } from 'react';
 
 // type IdeaResult = {
@@ -41,7 +42,7 @@ export function Home() {
   const handleGerarIdeia = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:3000/api/v1/gerar-ideia', {
+      const res = await fetch(`${process.env.API_URL}/v1/gerar-ideia`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nicho, descricao }),

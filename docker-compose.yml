@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  backend:
+    container_name: backend
+    build: 
+      context: ./back
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./back:/app
+      - /app/node_modules
+    ports:
+      - "3333:3333"
+    environment:
+      - PORT=3333
+      - NODE_ENV=development
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    command: ["npm", "run", "start:dev"]
+
+  frontend:
+    container_name: frontend
+    build: 
+      context: ./front
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./front:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - backend
+    command: ["npm", "run", "dev"]

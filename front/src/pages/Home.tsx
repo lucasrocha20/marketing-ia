@@ -1,35 +1,35 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-type IdeaResult = {
-  nome?: string;
-  descricaoCurta?: string;
-  publico?: string;
-  diferencial?: string;
-  primeiraAcao?: string;
-  raw?: string;
-};
+// type IdeaResult = {
+//   nome?: string;
+//   descricaoCurta?: string;
+//   publico?: string;
+//   diferencial?: string;
+//   primeiraAcao?: string;
+//   raw?: string;
+// };
 
-function parseOpenAIStyle(text: string): IdeaResult {
-  const getSection = (n: number) => {
-    const next = n + 1;
-    const re = new RegExp(`${n}\\.\\s*([\\s\\S]*?)(?=\\n\\s*${next}\\.|$)`, 'm');
-    const m = text.match(re);
-    return m ? m[1].trim() : undefined;
-  };
+// function parseOpenAIStyle(text: string): IdeaResult {
+//   const getSection = (n: number) => {
+//     const next = n + 1;
+//     const re = new RegExp(`${n}\\.\\s*([\\s\\S]*?)(?=\\n\\s*${next}\\.|$)`, 'm');
+//     const m = text.match(re);
+//     return m ? m[1].trim() : undefined;
+//   };
 
-  const result: IdeaResult = {
-    nome: getSection(1),
-    descricaoCurta: getSection(2),
-    publico: getSection(3),
-    diferencial: getSection(4),
-    primeiraAcao: getSection(5),
-    raw: text,
-  };
+//   const result: IdeaResult = {
+//     nome: getSection(1),
+//     descricaoCurta: getSection(2),
+//     publico: getSection(3),
+//     diferencial: getSection(4),
+//     primeiraAcao: getSection(5),
+//     raw: text,
+//   };
 
-  const anyParsed = result.nome || result.descricaoCurta || result.publico || result.diferencial || result.primeiraAcao;
-  if (!anyParsed) return { raw: text };
-  return result;
-}
+//   const anyParsed = result.nome || result.descricaoCurta || result.publico || result.diferencial || result.primeiraAcao;
+//   if (!anyParsed) return { raw: text };
+//   return result;
+// }
 
 export function Home() {
   const [nicho, setNicho] = useState('');
@@ -49,8 +49,8 @@ export function Home() {
 
       const json = await res.json();
 
-      const raw = json?.data?.ideia || (typeof json === 'string' ? json : JSON.stringify(json));
-      const parsed = parseOpenAIStyle(raw);
+      // const raw = json?.data?.ideia || (typeof json === 'string' ? json : JSON.stringify(json));
+      // const parsed = parseOpenAIStyle(raw);
       setResultado(json.data.ideia);
     } catch {
       // setResultado({ raw: 'Erro ao gerar ideia. Tente novamente.' });

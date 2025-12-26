@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { IdeiaController } from './routes/idea/ideia.controller';
-import { OpenaiService } from './routes/idea/openai.service';
+import { IdeaService } from './routes/idea/ideia.service';
 import { ConfigModule } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
 
@@ -30,6 +30,6 @@ import { ThrottlerModule } from '@nestjs/throttler';
     }),
   ],
   controllers: [AppController, IdeiaController],
-  providers: [AppService, OpenaiService],
+  providers: [AppService, IdeaService],
 })
 export class AppModule {}

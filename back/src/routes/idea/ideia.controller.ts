@@ -1,5 +1,5 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { OpenaiService } from './openai.service';
+import { IdeaService } from './ideia.service';
 
 export class GenerateIdeaDto {
   nicho: string;
@@ -8,14 +8,11 @@ export class GenerateIdeaDto {
 
 @Controller('gerar-ideia')
 export class IdeiaController {
-  constructor(private readonly openaiService: OpenaiService) {}
+  constructor(private readonly ideaService: IdeaService) {}
 
   @Post()
   async gerarIdeia(@Body() dto: GenerateIdeaDto) {
-    const idea = await this.openaiService.generateIdea(
-      dto.nicho,
-      dto.descricao,
-    );
+    const idea = await this.ideaService.generateIdea(dto.nicho, dto.descricao);
 
     return {
       success: true,

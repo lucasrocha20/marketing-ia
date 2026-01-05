@@ -19,6 +19,8 @@ export function Home() {
       const json = await res.json();
 
       setResultado(json.data.ideia);
+      setDescricao('');
+      setNicho('');
     } catch {
       setResultado('Erro ao gerar ideia. Tente novamente.');
     } finally {
